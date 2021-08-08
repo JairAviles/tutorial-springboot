@@ -2,6 +2,7 @@ package com.tutorial.springboot;
 
 import com.tutorial.springboot.bean.MyBean;
 import com.tutorial.springboot.bean.MyBeanWithDependecy;
+import com.tutorial.springboot.bean.MyBeanWithProperties;
 import com.tutorial.springboot.component.ComponentDependency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,9 @@ public class SpringbootApplication implements CommandLineRunner {
   @Autowired
   private MyBeanWithDependecy myBeanWithDependecy;
 
+  @Autowired
+  private MyBeanWithProperties myBeanWithProperties;
+
   public SpringbootApplication(@Qualifier("componentImplementTwo") ComponentDependency dependency) {
     this.dependency = dependency;
   }
@@ -33,5 +37,6 @@ public class SpringbootApplication implements CommandLineRunner {
     dependency.greet();
     bean.print();
     myBeanWithDependecy.printWithDependency();
+    System.out.println(myBeanWithProperties.fun());
   }
 }
