@@ -5,12 +5,14 @@ import com.tutorial.springboot.bean.MyBeanWithDependecy;
 import com.tutorial.springboot.bean.MyBeanWithProperties;
 import com.tutorial.springboot.component.ComponentDependency;
 import com.tutorial.springboot.pojo.UserPojo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+@Slf4j
 @SpringBootApplication
 public class SpringbootApplication implements CommandLineRunner {
 
@@ -43,5 +45,6 @@ public class SpringbootApplication implements CommandLineRunner {
     myBeanWithDependecy.printWithDependency();
     System.out.println(myBeanWithProperties.fun());
     System.out.println(userPojo.getEmail() + " " + userPojo.getPassword() + " " + userPojo.getAge());
+    log.info("Finish run");
   }
 }
