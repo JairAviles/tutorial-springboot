@@ -4,6 +4,7 @@ import com.tutorial.springboot.bean.MyBean;
 import com.tutorial.springboot.bean.MyBeanWithDependecy;
 import com.tutorial.springboot.bean.MyBeanWithProperties;
 import com.tutorial.springboot.component.ComponentDependency;
+import com.tutorial.springboot.pojo.UserPojo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -24,6 +25,9 @@ public class SpringbootApplication implements CommandLineRunner {
   @Autowired
   private MyBeanWithProperties myBeanWithProperties;
 
+  @Autowired
+  private UserPojo userPojo;
+
   public SpringbootApplication(@Qualifier("componentImplementTwo") ComponentDependency dependency) {
     this.dependency = dependency;
   }
@@ -38,5 +42,6 @@ public class SpringbootApplication implements CommandLineRunner {
     bean.print();
     myBeanWithDependecy.printWithDependency();
     System.out.println(myBeanWithProperties.fun());
+    System.out.println(userPojo.getEmail() + " " + userPojo.getPassword() + " " + userPojo.getAge());
   }
 }
