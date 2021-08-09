@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -51,15 +52,25 @@ public class SpringbootApplication implements CommandLineRunner {
   public void run(String... args) throws Exception {
 //    deprecatedExamples();
     saveUsersInDb();
+    getInformationFromUser();
   }
 
   private void saveUsersInDb() {
     User john = new User("John", "john@email.com", LocalDate.of(1980, 03, 20));
     User julie = new User("Julie", "julie@email.com", LocalDate.of(1988, 06, 04));
-    User daniel = new User("Daniel", "dan@email.com", LocalDate.of(1981, 11, 27));
+    User daniel = new User("Jair", "jair@email.com", LocalDate.of(1987, 03, 03));
 
     List<User> users = Arrays.asList(john, julie, daniel);
     users.forEach(userRepository::save);
+  }
+
+  private void getInformationFromUser() {
+    log.info("User found: " +
+        userRepository.findByUserEmail("john@email.com")
+            .orElseThrow(() -> new RuntimeException("User Not Found")));
+        userRepository.findAndSortByName("J", Sort.by("id").ascending())
+            .stream()
+            .forEach(user -> log.info("User sorted" + user));
   }
 
   private void deprecatedExamples() {
