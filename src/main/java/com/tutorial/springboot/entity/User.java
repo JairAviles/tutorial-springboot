@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -19,8 +19,11 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
+  @NonNull
   private String name;
+  @NonNull
   private String email;
+  @NonNull
   private LocalDate birthday;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
