@@ -70,7 +70,13 @@ public class SpringbootApplication implements CommandLineRunner {
             .orElseThrow(() -> new RuntimeException("User Not Found")));
         userRepository.findAndSortByName("J", Sort.by("id").ascending())
             .stream()
-            .forEach(user -> log.info("User sorted" + user));
+            .forEach(user -> log.info("User sorted " + user));
+        userRepository.findByName("Jair")
+            .stream()
+            .forEach(user -> log.info("User by name " + user));
+    log.info("User found by findByEmailAndName: " +
+        userRepository.findByEmailAndName("julie@email.com", "Julie")
+            .orElseThrow(() -> new RuntimeException("User Not Found")));
   }
 
   private void deprecatedExamples() {
