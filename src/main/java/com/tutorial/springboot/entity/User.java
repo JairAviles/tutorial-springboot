@@ -22,6 +22,7 @@ public class User {
   @NonNull
   private String name;
   @NonNull
+  @Column(unique = true)
   private String email;
   @NonNull
   private LocalDate birthDate;
