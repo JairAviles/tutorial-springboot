@@ -65,49 +65,54 @@ public class SpringbootApplication implements CommandLineRunner {
   }
 
   private void getInformationFromUser() {
-    log.info("User found: " +
-        userRepository.findByUserEmail("john@email.com")
-            .orElseThrow(() -> new RuntimeException("User Not Found")));
-        userRepository.findAndSortByName("J", Sort.by("id").ascending())
-            .stream()
-            .forEach(user -> log.info("User sorted " + user));
-        userRepository.findByName("Jair")
-            .stream()
-            .forEach(user -> log.info("User found by name " + user));
-    log.info("User found by findByEmailAndName: " +
-        userRepository.findByEmailAndName("julie@email.com", "Julie")
-            .orElseThrow(() -> new RuntimeException("User Not Found")));
+//    log.info("User found: " +
+//        userRepository.findByUserEmail("john@email.com")
+//            .orElseThrow(() -> new RuntimeException("User Not Found")));
+//        userRepository.findAndSortByName("J", Sort.by("id").ascending())
+//            .stream()
+//            .forEach(user -> log.info("User sorted " + user));
+//        userRepository.findByName("Jair")
+//            .stream()
+//            .forEach(user -> log.info("User found by name " + user));
+//    log.info("User found by findByEmailAndName: " +
+//        userRepository.findByEmailAndName("julie@email.com", "Julie")
+//            .orElseThrow(() -> new RuntimeException("User Not Found")));
+//
+//    userRepository.findByNameLike("%J%")
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameLike " + user));
+//
+//    userRepository.findByNameOrEmail(null, "jair@email.com")
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameOrEmail " + user));
+//
+//    userRepository.findByNameOrEmail("Julie", null)
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameOrEmail " + user));
+//
+//    userRepository.findByNameAndEmail("Jair", "jair@email.com")
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameAndEmail " + user));
+//
+//    userRepository.findByNameOrEmail("John", null)
+//        .stream()
+//        .forEach(user -> log.info("User by findByNameOrEmail " + user));
+//    userRepository.findByBirthDateBetween(LocalDate.of(1985, 01, 01), LocalDate.now())
+//        .stream()
+//        .forEach(user -> log.info("User found by findByBirthDateBetween " + user));
+//
+//    userRepository.findByNameLikeOrderByIdDesc("%i%")
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameLikeOrderByIdDesc " + user));
+//
+//    userRepository.findByNameContainingOrderByIdAsc("o")
+//        .stream()
+//        .forEach(user -> log.info("User found by findByNameContainingOrderByIdAsc " + user));
 
-    userRepository.findByNameLike("%J%")
-        .stream()
-        .forEach(user -> log.info("User found by findByNameLike " + user));
-
-    userRepository.findByNameOrEmail(null, "jair@email.com")
-        .stream()
-        .forEach(user -> log.info("User found by findByNameOrEmail " + user));
-
-    userRepository.findByNameOrEmail("Julie", null)
-        .stream()
-        .forEach(user -> log.info("User found by findByNameOrEmail " + user));
-
-    userRepository.findByNameAndEmail("Jair", "jair@email.com")
-        .stream()
-        .forEach(user -> log.info("User found by findByNameAndEmail " + user));
-
-    userRepository.findByNameOrEmail("John", null)
-        .stream()
-        .forEach(user -> log.info("User by findByNameOrEmail " + user));
-    userRepository.findByBirthDateBetween(LocalDate.of(1985, 01, 01), LocalDate.now())
-        .stream()
-        .forEach(user -> log.info("User found by findByBirthDateBetween " + user));
-
-    userRepository.findByNameLikeOrderByIdDesc("%i%")
-        .stream()
-        .forEach(user -> log.info("User found by findByNameLikeOrderByIdDesc " + user));
-
-    userRepository.findByNameContainingOrderByIdAsc("o")
-        .stream()
-        .forEach(user -> log.info("User found by findByNameContainingOrderByIdAsc " + user));
+    log.info("User found by getAllByBirthDateAndEmail: " +
+      userRepository.getAllByBirthDateAndEmail(LocalDate.of(1987, 03, 03), "jair@email.com")
+          .orElseThrow(() -> new RuntimeException("User Not Found"))
+    );
   }
 
   private void deprecatedExamples() {
