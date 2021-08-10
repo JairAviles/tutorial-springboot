@@ -24,7 +24,7 @@ public class User {
   @NonNull
   private String email;
   @NonNull
-  private LocalDate birthday;
+  private LocalDate birthDate;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JsonManagedReference
