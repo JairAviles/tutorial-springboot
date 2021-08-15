@@ -5,7 +5,9 @@ import com.tutorial.springboot.caseuse.DeleteUser;
 import com.tutorial.springboot.caseuse.GetUser;
 import com.tutorial.springboot.caseuse.UpdateUser;
 import com.tutorial.springboot.entity.User;
+import com.tutorial.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,9 @@ public class UserRestController {
   @Autowired
   private UpdateUser updateUser;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @GetMapping("/")
   List<User> get() {
     return getuser.getAll();
@@ -48,4 +53,10 @@ public class UserRestController {
   ResponseEntity<User> replaceUser(@RequestBody User user, @PathVariable Long id) {
     return new ResponseEntity<>(updateUser.update(user, id), HttpStatus.OK);
   }
+
+  @GetMapping("/pageable")
+  List<User> getUserPageable(@RequestParam int page, @RequestParam int size) {
+    return userRepository.findAll(PageRequest.of(page, size)).getContent();
+  }
+
 }
