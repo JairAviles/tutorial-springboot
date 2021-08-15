@@ -1,5 +1,6 @@
 package com.tutorial.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -29,5 +30,6 @@ public class User {
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JsonManagedReference
+  @JsonIgnore
   private List<Post> posts = new ArrayList<>();
 }

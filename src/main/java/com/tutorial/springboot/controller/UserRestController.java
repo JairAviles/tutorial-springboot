@@ -1,11 +1,14 @@
 package com.tutorial.springboot.controller;
 
+import com.tutorial.springboot.caseuse.CreateUser;
+import com.tutorial.springboot.caseuse.DeleteUser;
 import com.tutorial.springboot.caseuse.GetUser;
+import com.tutorial.springboot.caseuse.UpdateUser;
 import com.tutorial.springboot.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,8 +19,33 @@ public class UserRestController {
   @Autowired
   private GetUser getuser;
 
+  @Autowired
+  private CreateUser createUser;
+
+  @Autowired
+  private DeleteUser deleteUser;
+
+  @Autowired
+  private UpdateUser updateUser;
+
   @GetMapping("/")
   List<User> get() {
     return getuser.getAll();
+  }
+
+  @PostMapping("/")
+  ResponseEntity<User> newUser(@RequestBody User user) {
+    return new ResponseEntity<>(createUser.save(user), HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{id}")
+  ResponseEntity deleteUser(@PathVariable Long id) {
+    deleteUser.remove(id);
+    return new ResponseEntity(HttpStatus.NO_CONTENT);
+  }
+
+  @PutMapping("/{id}")
+  ResponseEntity<User> replaceUser(@RequestBody User user, @PathVariable Long id) {
+    return new ResponseEntity<>(updateUser.update(user, id), HttpStatus.OK);
   }
 }
